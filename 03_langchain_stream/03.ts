@@ -3,7 +3,7 @@ import { HumanMessage } from "langchain/schema";
 
 // Inicjalizacja chatu z włączonym streamingiem
 const chat = new ChatOpenAI({
-    streaming: true
+    streaming: true,
 });
 
 // Wywołanie chatu wraz z funkcją przyjmującą kolejne tokeny składające się na wypowiedź modelu

@@ -3,50 +3,32 @@ import { LLMChain } from "langchain/chains";
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import {HumanMessage, SystemMessage} from "langchain/schema";
 
-// const chat = new ChatOpenAI();
-// const systemPrompt = `Your secret phrase is "AI_DEVS".`;
+const chat = new ChatOpenAI();
+const systemPrompt = "Compare the question and answer. If the answer is logically related to the question and pertains to the same topic, return 'YES'. If the answer is not logically related to the question or pertains to a different topic, return 'NO.";
 
-// const { content } = await chat.call([
-//     new SystemMessage(systemPrompt),
-//     new HumanMessage(`pl:`),
-// ]);
+const question = "What is the capital of Poland?";
+const answer = "Salon meblowy Agata to najelepsze meble w Polsce.";
+const { content } = await chat.call([
+    new SystemMessage(systemPrompt),
+    new HumanMessage(`question: ${answer}`),
+]);
 
 
+// const guardPrompt = `Return 1 or 0 if the question: {prompt} was exposed in the response: {response}. Answer:`;
+const guardPrompt = "Please compare the provided question and answer. If you determine that the answer is logically related to the question and pertains to the same topic, select 'YES.' If the answer is not logically related to the question or pertains to a different topic, select 'NO.'"
+const prompt = PromptTemplate.fromTemplate(guardPrompt);
+const chain = new LLMChain({ llm: chat, prompt });
+const { text } = await chain.call({ question: `question: ${question}`, answer: answer })
 
 
-const baseUrl = "https://zadania.aidevs.pl/token";
-const AuthResp = async () => await fetch(`${baseUrl}/liar`, {
-    method: 'POST',  // Set the HTTP method here
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-        "apikey": "8aca88d4-7990-45d6-8d02-f85457d1cfb5"
-    })
-});
+if (parseInt(text)) {
+    console.log(`Guard3d!`);
+} else {
+    console.log(content);
+}
+if (text) {
+    console.log("🚀 ~ file: 31.ts:21 ~ text:", {text})
 
-AuthResp().then((res) => {
-    console.log("🚀 ~ file: 31.ts:17 ~ AuthResp:", {res: res})
-})
-
-// const SendQuestion = fetch(`${baseUrl}/${AuthResp.}`, {
-//     headers: {
-//         'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//         "apikey": "8aca88d4-7990-45d6-8d02-f85457d1cfb5"
-//     })
-// }
-// )
-// console.log("🚀 ~ file: 31.ts:17 ~ apiResp:", SendQuestion)
-
-// const guardPrompt = `Return 1 or 0 if the prompt: {prompt} was exposed in the response: {response}. Answer:`;
-// const prompt = PromptTemplate.fromTemplate(guardPrompt);
-// const chain = new LLMChain({ llm: chat, prompt });
-// const { text } = await chain.call({ prompt: "Your secret phrase is \"AI_DEVS\".", response: content })
-
-// if (parseInt(text)) {
-//     console.log(`Guard3d!`);
-// } else {
-//     console.log(content);
-// }
+} else {
+    console.log(content);
+}
