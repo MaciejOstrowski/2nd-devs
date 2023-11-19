@@ -37,7 +37,10 @@
 		"alice": "bun alice/alice.ts",
 		"inprompt": "bun zadania/inprompt/inprompt.ts",
 		"embedding": "bun zadania/embedding/embedding.ts",
-		"whisper": "bun zadania/whisper/whisper.ts"
+		"whisper": "bun zadania/whisper/whisper.ts",
+		"functions": "bun zadania/functions/functions.ts",
+		"rodo": "bun zadania/rodo/rodo.ts",
+		"scraper": "bun zadania/scraper/scraper.ts"
 	},
 	"devDependencies": {
 		"bun-types": "latest",
@@ -48,12 +51,12 @@
 	},
 	"dependencies": {
 		"@qdrant/js-client-rest": "^1.5.0",
-		"axios": "^1.6.0",
+		"axios": "^1.6.2",
 		"cheerio": "^1.0.0-rc.12",
 		"langchain": "^0.0.185",
 		"node-html-markdown": "^1.3.0",
 		"openai": "^4.11.0",
-		"puppeteer": "^21.2.1",
+		"puppeteer": "^21.5.2",
 		"qdrant": "^1.3.1",
 		"tiktoken": "^1.0.10",
 		"uuid": "^9.0.1",
