@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const authUrl = 'https://zadania.aidevs.pl/token';
-const taskUrl = 'https://zadania.aidevs.pl/task';
-const answerUrl = 'https://zadania.aidevs.pl/answer';
-const apikey = '8aca88d4-7990-45d6-8d02-f85457d1cfb5';
+export const authUrl = 'https://zadania.aidevs.pl/token';
+export const taskUrl = 'https://zadania.aidevs.pl/task';
+export const answerUrl = 'https://zadania.aidevs.pl/answer';
+export const apikey = '8aca88d4-7990-45d6-8d02-f85457d1cfb5';
 
 export const AuthResp = async (taskName: string) => {
 	console.log('🚀 ~ file: main.ts:9 ~ taskName:', { taskName, apikey });
